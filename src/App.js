@@ -1,11 +1,12 @@
 import "./App.css";
 import { signInWithGoogle } from "./firebase-config";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createContext, useState } from "react";
 import About from "./components/About";
 import Blog from "./components/Blog";
 import Pricing from "./components/Pricing";
 import Contact from "./components/Contact";
+import Navbar from "./components/Navbar";
 export const AuthContext = createContext({ user: null });
 function App() {
   const [user, setUser] = useState(null);
@@ -13,38 +14,7 @@ function App() {
   return (
     <AuthContext.Provider value={user}>
       <Router>
-        <nav className="flex border-b">
-          <Link
-            className="-mb-px mr-1 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold"
-            to={"/"}
-          >
-            Home
-          </Link>
-          <Link
-            className="mr-1 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold"
-            to={"/about"}
-          >
-            About us
-          </Link>
-          <Link
-            className="mr-1 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold"
-            to={"/blog"}
-          >
-            Blog
-          </Link>
-          <Link
-            className="mr-1 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold"
-            to={"/pricing"}
-          >
-            Pricing
-          </Link>
-          <Link
-            className="mr-1 bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold"
-            to={"/contact"}
-          >
-            Contact
-          </Link>
-        </nav>
+        <Navbar />
         <Routes>
           <Route path="/" element={<h1>HOME PAGE</h1>} />
           <Route path="/about" element={<About />} />
