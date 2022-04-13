@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -13,18 +13,18 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 export const auth = getAuth(app);
-//add google auth provider
+export const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
-export async function signInWithGoogle() {
+//add google auth provider
+export async function signInWithGoogle(setUser) {
   try {
     const result = await signInWithPopup(auth, provider); //will return a promise
-    console.log({ result });
+    setUser(result.user);
     // result.user.displayName;
     // result.user.email;
     // result.user.photoURL;
   } catch (error) {
-    console.error(error);
+    console.error({ error });
   }
 }
