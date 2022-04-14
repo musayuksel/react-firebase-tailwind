@@ -20,10 +20,13 @@ const provider = new GoogleAuthProvider();
 export async function signInWithGoogle(setUser) {
   try {
     const result = await signInWithPopup(auth, provider); //will return a promise
-    setUser(result.user);
-    // result.user.displayName;
-    // result.user.email;
-    // result.user.photoURL;
+    const user = {
+      displayName: result.user.displayName,
+      email: result.user.email,
+      photoURL: result.user.photoURL,
+    };
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
   } catch (error) {
     console.error({ error });
   }
