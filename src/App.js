@@ -10,7 +10,6 @@ import Navbar from "./components/Navbar";
 export const AuthContext = createContext({ user: null });
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  console.log({ user });
   return (
     <AuthContext.Provider value={user}>
       <Router>
@@ -18,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home user={user} setUser={setUser} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog" element={<Blog user={user} />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
