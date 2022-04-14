@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Navbar user={user} setUser={setUser} />
         <Routes>
-          <Route path="/" element={<Home setUser={setUser} />} />
+          <Route path="/" element={<Home user={user} setUser={setUser} />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/pricing" element={<Pricing />} />
