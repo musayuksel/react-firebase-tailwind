@@ -29,6 +29,7 @@ export async function signInWithGoogle(setUser) {
       displayName: result.user.displayName,
       email: result.user.email,
       photoURL: result.user.photoURL,
+      uid: result.user.uid,
     };
     localStorage.setItem("user", JSON.stringify(user));
     setUser(user);
