@@ -1,6 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -30,4 +35,11 @@ export async function signInWithGoogle(setUser) {
   } catch (error) {
     console.error({ error });
   }
+}
+
+export function handleSignOut(setUser, navigate) {
+  signOut(auth);
+  localStorage.removeItem("user");
+  setUser(null);
+  navigate("/");
 }
