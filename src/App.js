@@ -1,5 +1,4 @@
 import "./App.css";
-import { signInWithGoogle } from "./firebase-config";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createContext, useState } from "react";
 import About from "./components/About";
@@ -15,7 +14,7 @@ function App() {
   return (
     <AuthContext.Provider value={user}>
       <Router>
-        <Navbar />
+        <Navbar user={user} setUser={setUser} />
         <Routes>
           <Route path="/" element={<Home setUser={setUser} />} />
           <Route path="/about" element={<About />} />
