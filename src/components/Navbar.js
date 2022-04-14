@@ -1,11 +1,10 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-
-export default function Navbar() {
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { handleSignOut } from "../firebase-config";
+export default function Navbar({ user, setUser }) {
   //take the location from the router and use it to set the active class
   const path = useLocation().pathname.slice(1);
-  console.log(path);
-
+  const navigate = useNavigate();
   return (
     <nav className="flex border-b">
       <Link
@@ -48,6 +47,14 @@ export default function Navbar() {
       >
         Contact
       </Link>
+      {user && (
+        <button
+          className="bg-red-100  text-red-700 font-semibold py-2 px-4 border border-transparent hover:border-red-500 rounded"
+          onClick={() => handleSignOut(setUser, navigate)}
+        >
+          Sign out
+        </button>
+      )}
     </nav>
   );
 }
