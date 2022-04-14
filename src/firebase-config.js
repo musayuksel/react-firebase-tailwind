@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -6,7 +5,13 @@ import {
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import {
+  getFirestore,
+  getDocs,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -37,10 +42,22 @@ export async function signInWithGoogle(setUser) {
     console.error({ error });
   }
 }
-
+//submit form and redirect to home page
 export function handleSignOut(setUser, navigate) {
   signOut(auth);
   localStorage.removeItem("user");
   setUser(null);
   navigate("/");
+}
+
+//get user data from firebase and update state
+export async function getUserData(setUserData, user) {
+  const docRef = collection(db, "user_forms");
+  const getQuery = query(docRef, where("author.id", "==", user.uid));
+  const userData = await getDocs(getQuery);
+  const userDataArray = userData.docs.map((doc) => ({
+    ...doc.data(),
+    documentId: doc.id,
+  }));
+  setUserData(userDataArray || []);
 }
