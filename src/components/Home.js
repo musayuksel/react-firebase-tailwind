@@ -5,27 +5,35 @@ import { useNavigate } from "react-router-dom";
 export default function Home({ user, setUser }) {
   const [name, setName] = useState("");
   const [income, setIncome] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsSubmitting(true);
     const postCollectionRef = collection(db, "user_forms");
     const result = await addDoc(postCollectionRef, {
       name,
       income: +income,
       author: { email: user.email, id: user.uid },
     });
-    navigate("/dashboard");
+    if (result) {
+      setIsSubmitting(false);
+      navigate("/dashboard");
+    }
   }
   return (
     <main className="App container">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <button
-        onClick={() => signInWithGoogle(setUser)}
-        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      >
-        Sign-in with Google
-      </button>
-      {user && (
+      <h1 className="text-3xl font-bold underline">
+        Welcome {user ? user.displayName : "!!!"}
+      </h1>
+      {!user ? (
+        <button
+          onClick={() => signInWithGoogle(setUser)}
+          className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        >
+          Sign-in with Google
+        </button>
+      ) : (
         <form onSubmit={handleSubmit} className="w-full max-w-lg">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -61,6 +69,7 @@ export default function Home({ user, setUser }) {
           <button
             className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
             type="submit"
+            disabled={isSubmitting}
           >
             Submit
           </button>
