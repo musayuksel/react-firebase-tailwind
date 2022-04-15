@@ -43,15 +43,16 @@ export default function Home({ user, setUser }) {
           </label>
           <input
             onChange={(e) => setName(e.target.value)}
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white"
             type="text"
             value={name}
             id="grid-name"
             placeholder="Enter your name"
+            required
           />
-          <p className="text-red-500 text-xs italic">
+          {/* <p className="text-red-500 text-xs italic">
             Please fill out this field.
-          </p>
+          </p> */}
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             htmlFor="gross-income"
@@ -60,11 +61,12 @@ export default function Home({ user, setUser }) {
           </label>
           <input
             onChange={(e) => setIncome(e.target.value)}
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
             value={income}
             type="number"
             id="gross-income"
             placeholder="Enter your gross income"
+            required
           />
           <button
             className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
