@@ -14,7 +14,7 @@ export default function Home({ user, setUser }) {
       income: +income,
       author: { email: user.email, id: user.uid },
     });
-    navigate("/blog");
+    navigate("/dashboard");
   }
   return (
     <main className="App container">

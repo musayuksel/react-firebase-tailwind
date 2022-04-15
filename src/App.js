@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createContext, useState } from "react";
 import About from "./components/About";
-import Blog from "./components/Blog";
+import Dashboard from "./components/Dashboard";
 import Home from "./components/Home";
 import Pricing from "./components/Pricing";
 import Contact from "./components/Contact";
@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home user={user} setUser={setUser} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog user={user} />} />
+          <Route path="/dashboard" element={<Dashboard user={user} />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

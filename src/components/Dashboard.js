@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getUserData } from "../firebase-config";
 
-export default function Blog({ user }) {
+export default function Dashboard({ user }) {
   const [userData, setUserData] = useState([]);
   useEffect(() => {
     getUserData(setUserData, user);
