@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { db, signInWithGoogle } from "../firebase-config";
 import { addDoc, collection } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 export default function Home({ user, setUser }) {
   const [name, setName] = useState("");
   const [income, setIncome] = useState(0);
+  const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
     const postCollectionRef = collection(db, "user_forms");
@@ -12,7 +14,7 @@ export default function Home({ user, setUser }) {
       income: +income,
       author: { email: user.email, id: user.uid },
     });
-    console.log({ result });
+    navigate("/blog");
   }
   return (
     <main className="App container">
