@@ -40,7 +40,22 @@ export default function Dashboard({ user }) {
   });
   return (
     <>
-      <div className="container">{dataCards}</div>
+      <div className="container">
+        {dataCards.length === 0 ? (
+          <>
+            <h2>You don't have any data </h2>
+            <button
+              className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+              type="button"
+              onClick={() => navigate("/")}
+            >
+              Start now
+            </button>
+          </>
+        ) : (
+          dataCards
+        )}
+      </div>
     </>
   );
 }
