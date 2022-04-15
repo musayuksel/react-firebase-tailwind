@@ -11,6 +11,8 @@ import {
   collection,
   query,
   where,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -60,4 +62,10 @@ export async function getUserData(setUserData, user) {
     documentId: doc.id,
   }));
   setUserData(userDataArray || []);
+}
+
+export async function deleteUserData(documentId) {
+  const docRef = doc(db, "user_forms", documentId);
+  const result = await deleteDoc(docRef);
+  return result;
 }
