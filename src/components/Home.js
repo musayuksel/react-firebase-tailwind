@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { db, signInWithGoogle } from "../firebase-config";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-export default function Home({ user, setUser }) {
+import { AuthContext } from "../App";
+export default function Home() {
+  const { user, setUser } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [income, setIncome] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);

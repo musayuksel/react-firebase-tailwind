@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getUserData, deleteUserData } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../App";
 
-export default function Dashboard({ user }) {
+export default function Dashboard() {
+  const { user } = useContext(AuthContext);
   const [userData, setUserData] = useState([]);
   const navigate = useNavigate();
 

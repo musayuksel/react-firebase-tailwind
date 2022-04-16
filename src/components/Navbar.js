@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { handleSignOut } from "../firebase-config";
-export default function Navbar({ user, setUser }) {
+import { AuthContext } from "../App";
+export default function Navbar() {
   //take the location from the router and use it to set the active class
   const path = useLocation().pathname.slice(1);
   const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
   return (
     <nav className="flex border-b">
       <Link
