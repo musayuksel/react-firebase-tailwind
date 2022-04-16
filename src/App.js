@@ -11,13 +11,13 @@ export const AuthContext = createContext({ user: null });
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   return (
-    <AuthContext.Provider value={user}>
+    <AuthContext.Provider value={{ user, setUser }}>
       <Router>
-        <Navbar user={user} setUser={setUser} />
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Home user={user} setUser={setUser} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/dashboard" element={<Dashboard user={user} />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
